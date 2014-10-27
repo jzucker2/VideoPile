@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class PlayerView, AVPlayer, AVPlayerItem;
+
 @interface ViewController : UIViewController
+
+@property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, weak) IBOutlet PlayerView *playerView;
+@property (nonatomic, weak) IBOutlet UIButton *playButton;
 
 
 @end
