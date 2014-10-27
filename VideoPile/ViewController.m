@@ -111,4 +111,21 @@
 //    }];
 }
 
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView:self.view];
+    
+    [UIView animateWithDuration:0.1
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+//                         CGAffineTransform scaleTrans =
+//                         CGAffineTransformMakeScale(2, 2);
+//                         
+//                         _boxView.transform = scaleTrans;
+                         _imageView.center = location;
+                     } completion:nil];
+}
+
 @end

@@ -16,6 +16,7 @@
 		9727D29A19FB03F10062909B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9727D29819FB03F10062909B /* LaunchScreen.xib */; };
 		9727D2A619FB03F10062909B /* VideoPileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2A519FB03F10062909B /* VideoPileTests.m */; };
 		9727D2B719FB0E930062909B /* VideoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2B619FB0E930062909B /* VideoImageView.m */; };
+		9727D2BA19FEE8640062909B /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2B919FEE8640062909B /* PlayerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		9727D2A519FB03F10062909B /* VideoPileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPileTests.m; sourceTree = "<group>"; };
 		9727D2B519FB0E930062909B /* VideoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoImageView.h; sourceTree = "<group>"; };
 		9727D2B619FB0E930062909B /* VideoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoImageView.m; sourceTree = "<group>"; };
+		9727D2B819FEE8640062909B /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
+		9727D2B919FEE8640062909B /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
 		C0D80F857FDA98E6A2188593 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +118,8 @@
 				9727D29319FB03F10062909B /* Main.storyboard */,
 				9727D2B519FB0E930062909B /* VideoImageView.h */,
 				9727D2B619FB0E930062909B /* VideoImageView.m */,
+				9727D2B819FEE8640062909B /* PlayerView.h */,
+				9727D2B919FEE8640062909B /* PlayerView.m */,
 				9727D29619FB03F10062909B /* Images.xcassets */,
 				9727D29819FB03F10062909B /* LaunchScreen.xib */,
 				9727D28919FB03F10062909B /* Supporting Files */,
@@ -287,6 +292,7 @@
 				9727D29219FB03F10062909B /* ViewController.m in Sources */,
 				9727D28F19FB03F10062909B /* AppDelegate.m in Sources */,
 				9727D28C19FB03F10062909B /* main.m in Sources */,
+				9727D2BA19FEE8640062909B /* PlayerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
