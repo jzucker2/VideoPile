@@ -13,11 +13,12 @@
 @interface VideoPlayerView ()
 
 @property (nonatomic) CGRect originalFrame;
+@property (nonatomic, strong) NSURL *redditURL;
 
 @end
 
-static NSString* const VideoPlayerViewPassedUpvoteThreshold = @"VideoPlayerViewPassedUpvoteThreshold";
-static NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerViewPassedDownvoteThreshold";
+NSString* const VideoPlayerViewPassedUpvoteThreshold = @"VideoPlayerViewPassedUpvoteThreshold";
+NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerViewPassedDownvoteThreshold";
 
 @implementation VideoPlayerView
 
@@ -29,10 +30,21 @@ static NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerVie
 }
 */
 
+- (void)playVideo
+{
+    [_moviePlayer play];
+}
+
+- (void)pauseVideo
+{
+    [_moviePlayer pause];
+}
+
 - (void)setVideo:(NSURL *)url
 {
+    _redditURL = url;
     // Gets an dictionary with each available youtube url
-    NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:url];
+    NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:_redditURL];
     
     if (!_moviePlayer) {
         // Presents a MoviePlayerController with the youtube quality medium
@@ -47,7 +59,11 @@ static NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerVie
         [self addSubview:_moviePlayer.view];
     } else {
         _moviePlayer.contentURL = [NSURL URLWithString:[videos objectForKey:@"medium"]];
+        self.frame = _originalFrame;
     }
+    
+    [self.superview bringSubviewToFront:self];
+    [self bringSubviewToFront:_moviePlayer.view];
     
     //_moviePlayer.view.tintColor = [UIColor redColor];
     
@@ -130,20 +146,57 @@ static NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerVie
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    __block CGPoint location = [touch locationInView:self];
-    __block CGPoint previous = [touch previousLocationInView:self];
+//    UITouch *touch = [touches anyObject];
+//    __block CGPoint location = [touch locationInView:self];
+//    __block CGPoint previous = [touch previousLocationInView:self];
     
-    if (!CGAffineTransformIsIdentity(self.transform)) {
-        location = CGPointApplyAffineTransform(location, self.transform);
-        previous = CGPointApplyAffineTransform(previous, self.transform);
+//    if (!CGAffineTransformIsIdentity(self.transform)) {
+//        location = CGPointApplyAffineTransform(location, self.transform);
+//        previous = CGPointApplyAffineTransform(previous, self.transform);
+//    }
+    
+//    if (self.frame.origin.y > (self.superview.frame.size.height * .25)) {
+//        NSLog(@"one way");
+//    } else if (self.frame.origin.y < (self.superview.frame.size.height * .75)) {
+//        NSLog(@"other way");
+//    }
+    
+    __block BOOL didUpvote = NO;
+    __block BOOL didDownvote = NO;
+    __block CGRect finalFrame;
+    if (self.frame.origin.y < (-self.superview.frame.size.height * .25)) {
+        NSLog(@"up");
+        finalFrame = CGRectOffset(self.frame, 0, -400);
+        didUpvote = YES;
+    } else if (self.frame.origin.y > (self.superview.frame.size.height * .75)) {
+        NSLog(@"down");
+        didDownvote = YES;
+        finalFrame = CGRectOffset(self.frame, 0, 400);
+    } else {
+        finalFrame = _originalFrame;
     }
     
     [UIView animateWithDuration:0.2 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.transform = CGAffineTransformIdentity;
-        self.frame = _originalFrame;
+        self.frame = finalFrame;
     } completion:^(BOOL finished) {
+        NSDictionary *userInfo = @{@"redditURL" : _redditURL};
+        if (didUpvote) {
+            [self pauseVideo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:VideoPlayerViewPassedUpvoteThreshold object:self userInfo:userInfo];
+        } else if (didDownvote) {
+            [self pauseVideo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:VideoPlayerViewPassedDownvoteThreshold object:self userInfo:userInfo];
+        }
+        didDownvote = NO;
+        didUpvote = NO;
         //NSLog(@"finished!");
+        // would be cool if it resized after moving as opposed to while moving
+//        [UIView animateWithDuration:0.2 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//            self.transform = CGAffineTransformIdentity;
+//        } completion:^(BOOL finished) {
+//            //NSLog(@"finished");
+//        }];
     }];
 }
 

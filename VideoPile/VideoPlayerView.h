@@ -10,6 +10,9 @@
 
 @class MPMoviePlayerController;
 
+extern NSString* const VideoPlayerViewPassedUpvoteThreshold;
+extern NSString* const VideoPlayerViewPassedDownvoteThreshold;
+
 @interface VideoPlayerView : UIView
 
 @property (nonatomic, weak) IBOutlet UIButton *playPauseButton;
@@ -18,5 +21,8 @@
 - (IBAction)playPauseAction:(id)sender;
 
 - (void)setVideo:(NSURL *)url;
+
+- (void)pauseVideo;
+- (void)playVideo;
 
 @end
