@@ -17,6 +17,13 @@
 		9727D2A619FB03F10062909B /* VideoPileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2A519FB03F10062909B /* VideoPileTests.m */; };
 		9727D2BE19FF19100062909B /* 2000px-Orange_logo.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9727D2BD19FF19100062909B /* 2000px-Orange_logo.svg.png */; };
 		9727D2C119FF1AAD0062909B /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2C019FF1AAD0062909B /* VideoPlayerView.m */; };
+		97CBF1BF1A005C6000CB5488 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1B81A005C6000CB5488 /* Icon-72.png */; };
+		97CBF1C01A005C6000CB5488 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1B91A005C6000CB5488 /* Icon-Small-50.png */; };
+		97CBF1C11A005C6000CB5488 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1BA1A005C6000CB5488 /* Icon-Small.png */; };
+		97CBF1C21A005C6000CB5488 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1BB1A005C6000CB5488 /* Icon-Small@2x.png */; };
+		97CBF1C31A005C6000CB5488 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1BC1A005C6000CB5488 /* Icon.png */; };
+		97CBF1C41A005C6000CB5488 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1BD1A005C6000CB5488 /* Icon@2x.png */; };
+		97CBF1C51A005C6000CB5488 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1BE1A005C6000CB5488 /* iTunesArtwork */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +55,13 @@
 		9727D2BD19FF19100062909B /* 2000px-Orange_logo.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2000px-Orange_logo.svg.png"; sourceTree = "<group>"; };
 		9727D2BF19FF1AAD0062909B /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
 		9727D2C019FF1AAD0062909B /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
+		97CBF1B81A005C6000CB5488 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		97CBF1B91A005C6000CB5488 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		97CBF1BA1A005C6000CB5488 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		97CBF1BB1A005C6000CB5488 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		97CBF1BC1A005C6000CB5488 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		97CBF1BD1A005C6000CB5488 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		97CBF1BE1A005C6000CB5488 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		C0D80F857FDA98E6A2188593 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,8 +132,15 @@
 				9727D2BF19FF1AAD0062909B /* VideoPlayerView.h */,
 				9727D2C019FF1AAD0062909B /* VideoPlayerView.m */,
 				9727D2BD19FF19100062909B /* 2000px-Orange_logo.svg.png */,
+				97CBF1B81A005C6000CB5488 /* Icon-72.png */,
+				97CBF1B91A005C6000CB5488 /* Icon-Small-50.png */,
+				97CBF1BA1A005C6000CB5488 /* Icon-Small.png */,
+				97CBF1BB1A005C6000CB5488 /* Icon-Small@2x.png */,
+				97CBF1BC1A005C6000CB5488 /* Icon.png */,
+				97CBF1BD1A005C6000CB5488 /* Icon@2x.png */,
 				9727D29619FB03F10062909B /* Images.xcassets */,
 				9727D29819FB03F10062909B /* LaunchScreen.xib */,
+				97CBF1BE1A005C6000CB5488 /* iTunesArtwork */,
 				9727D28919FB03F10062909B /* Supporting Files */,
 			);
 			path = VideoPile;
@@ -233,10 +254,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97CBF1C31A005C6000CB5488 /* Icon.png in Resources */,
 				9727D29519FB03F10062909B /* Main.storyboard in Resources */,
+				97CBF1C11A005C6000CB5488 /* Icon-Small.png in Resources */,
+				97CBF1BF1A005C6000CB5488 /* Icon-72.png in Resources */,
 				9727D29A19FB03F10062909B /* LaunchScreen.xib in Resources */,
+				97CBF1C01A005C6000CB5488 /* Icon-Small-50.png in Resources */,
+				97CBF1C51A005C6000CB5488 /* iTunesArtwork in Resources */,
+				97CBF1C21A005C6000CB5488 /* Icon-Small@2x.png in Resources */,
 				9727D2BE19FF19100062909B /* 2000px-Orange_logo.svg.png in Resources */,
 				9727D29719FB03F10062909B /* Images.xcassets in Resources */,
+				97CBF1C41A005C6000CB5488 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +441,7 @@
 			baseConfigurationReference = 8B65190675274CE658D6BB49 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = VideoPile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -424,6 +453,7 @@
 			baseConfigurationReference = C0D80F857FDA98E6A2188593 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = VideoPile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
