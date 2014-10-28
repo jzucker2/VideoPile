@@ -10,6 +10,12 @@
 #import <HCYoutubeParser/HCYoutubeParser.h>
 @import MediaPlayer;
 
+@interface VideoPlayerView ()
+
+@property (nonatomic) CGRect originalFrame;
+
+@end
+
 @implementation VideoPlayerView
 
 /*
@@ -57,6 +63,103 @@
 - (IBAction)playPauseAction:(id)sender
 {
     
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    __block CGPoint location = [touch locationInView:self];
+    __block CGPoint previous = [touch previousLocationInView:self];
+    
+    NSLog(@"_originalFrame is %@", NSStringFromCGRect(_originalFrame));
+    
+    if (CGRectIsEmpty(_originalFrame)) {
+        _originalFrame = self.frame;
+    }
+    
+    if (!CGAffineTransformIsIdentity(self.transform)) {
+        location = CGPointApplyAffineTransform(location, self.transform);
+        previous = CGPointApplyAffineTransform(previous, self.transform);
+    }
+    
+    //    self.frame = CGRectOffset(self.frame,
+    //                              (location.x - previous.x),
+    //                              (location.y - previous.y));
+    
+    [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.transform = CGAffineTransformMakeScale(0.6, 0.6);
+    } completion:^(BOOL finished) {
+        NSLog(@"finished!");
+        [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.frame = CGRectOffset(self.frame,
+                                      (location.x - previous.x),
+                                      (location.y - previous.y));
+        } completion:^(BOOL finished) {
+            NSLog(@"finished!");
+        }];
+    }];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    __block CGPoint location = [touch locationInView:self];
+    __block CGPoint previous = [touch previousLocationInView:self];
+    
+    if (!CGAffineTransformIsIdentity(self.transform)) {
+        location = CGPointApplyAffineTransform(location, self.transform);
+        previous = CGPointApplyAffineTransform(previous, self.transform);
+    }
+    
+//    self.frame = CGRectOffset(self.frame,
+//                              (location.x - previous.x),
+//                              (location.y - previous.y));
+    
+    [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.frame = CGRectOffset(self.frame,
+                                  (location.x - previous.x),
+                                  (location.y - previous.y));
+    } completion:^(BOOL finished) {
+        NSLog(@"finished!");
+    }];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    __block CGPoint location = [touch locationInView:self];
+    __block CGPoint previous = [touch previousLocationInView:self];
+    
+    if (!CGAffineTransformIsIdentity(self.transform)) {
+        location = CGPointApplyAffineTransform(location, self.transform);
+        previous = CGPointApplyAffineTransform(previous, self.transform);
+    }
+    
+    [UIView animateWithDuration:0.2 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.transform = CGAffineTransformIdentity;
+        self.frame = _originalFrame;
+    } completion:^(BOOL finished) {
+        NSLog(@"finished!");
+    }];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    __block CGPoint location = [touch locationInView:self];
+    __block CGPoint previous = [touch previousLocationInView:self];
+    
+    if (!CGAffineTransformIsIdentity(self.transform)) {
+        location = CGPointApplyAffineTransform(location, self.transform);
+        previous = CGPointApplyAffineTransform(previous, self.transform);
+    }
+    
+    [UIView animateWithDuration:0.2 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.transform = CGAffineTransformIdentity;
+        self.frame = _originalFrame;
+    } completion:^(BOOL finished) {
+        NSLog(@"finished!");
+    }];
 }
 
 @end

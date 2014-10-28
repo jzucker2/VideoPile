@@ -235,50 +235,74 @@
     _didDownvote = NO;
     _didUpvote = NO;
     _didVote = NO;
+//    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        <#code#>
+//    } completion:^(BOOL finished) {
+//        <#code#>
+//    }];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInView:self.view];
-    CGPoint lastLocation = [touch previousLocationInView:self.view];
-    NSLog(@"touches is %@", touches);
-    
-    _didVote = NO;
-    _didDownvote = NO;
-    _didUpvote = NO;
-    [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        if (_playerView.center.y > (self.view.frame.size.height * 0.75)) {
-            NSLog(@"shwinggggggggggg low");
-            _didVote = YES;
-            _didDownvote = YES;
-        } else if (_playerView.center.y < (self.view.frame.size.height * 0.25)) {
-            NSLog(@"dammmmmmmmmmmmmm high");
-            _didVote = YES;
-            _didUpvote = YES;
-        } else {
-            _playerView.center = location;
-            _playerView.transform = CGAffineTransformMakeTranslation(location.x-lastLocation.x, location.y-lastLocation.y);
-        }
-    } completion:^(BOOL finished) {
-//        if (_didVote) {
-//            NSLog(@"didVote touchesMoved");
-//            [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
-//                if (_didUpvote) {
-//                    _playerView.center = CGPointMake(_playerView.center.x, -600);
-//                } else if (_didDownvote) {
-//                    _playerView.center = CGPointMake(_playerView.center.x, 900);
-//                } else {
-//                    NSLog(@"else");
-//                }
-//            } completion:^(BOOL finished) {
-//                NSLog(@"finished!");
-//                _didVote = NO;
-//                _didUpvote = NO;
-//                _didDownvote = NO;
-//            }];
+//    UITouch *touch = [touches anyObject];
+//    if (touch.view == _playerView) {
+//        __block CGPoint location = [touch locationInView:self.view];
+//        __block CGPoint lastLocation = [touch previousLocationInView:self.view];
+//        NSLog(@"touches is %@", touches);
+//        
+//        _didVote = NO;
+//        _didDownvote = NO;
+//        _didUpvote = NO;
+//        
+//        if (!CGAffineTransformIsIdentity(_playerView.transform)) {
+//            location = CGPointApplyAffineTransform(location, _playerView.transform);
+//            lastLocation = CGPointApplyAffineTransform(lastLocation, _playerView.transform);
 //        }
-    }];
+//        
+//        _playerView.frame = CGRectOffset(_playerView.frame,
+//                                  (location.x - lastLocation.x),
+//                                  (location.y - lastLocation.y));
+//        [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//            if (_playerView.center.y > (self.view.frame.size.height * 0.75)) {
+//                NSLog(@"shwinggggggggggg low");
+//                _didVote = YES;
+//                _didDownvote = YES;
+//            } else if (_playerView.center.y < (self.view.frame.size.height * 0.25)) {
+//                NSLog(@"dammmmmmmmmmmmmm high");
+//                _didVote = YES;
+//                _didUpvote = YES;
+//            } else {
+//                //_playerView.center = location;
+//                //_playerView.transform = CGAffineTransformMakeTranslation(location.x-lastLocation.x, location.y-lastLocation.y);
+//                if (!CGAffineTransformIsIdentity(_playerView.transform)) {
+//                    location = CGPointApplyAffineTransform(location, _playerView.transform);
+//                    lastLocation = CGPointApplyAffineTransform(lastLocation, _playerView.transform);
+//                }
+//                
+//                _playerView.frame = CGRectOffset(_playerView.frame,
+//                                          (location.x - lastLocation.x),
+//                                          (location.y - lastLocation.y));
+//            }
+//        } completion:^(BOOL finished) {
+//            //        if (_didVote) {
+//            //            NSLog(@"didVote touchesMoved");
+//            //            [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//            //                if (_didUpvote) {
+//            //                    _playerView.center = CGPointMake(_playerView.center.x, -600);
+//            //                } else if (_didDownvote) {
+//            //                    _playerView.center = CGPointMake(_playerView.center.x, 900);
+//            //                } else {
+//            //                    NSLog(@"else");
+//            //                }
+//            //            } completion:^(BOOL finished) {
+//            //                NSLog(@"finished!");
+//            //                _didVote = NO;
+//            //                _didUpvote = NO;
+//            //                _didDownvote = NO;
+//            //            }];
+//            //        }
+//        }];
+//    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
