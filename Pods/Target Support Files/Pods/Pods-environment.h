@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 4
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 1
 
+// HCYoutubeParser
+#define COCOAPODS_POD_AVAILABLE_HCYoutubeParser
+#define COCOAPODS_VERSION_MAJOR_HCYoutubeParser 0
+#define COCOAPODS_VERSION_MINOR_HCYoutubeParser 0
+#define COCOAPODS_VERSION_PATCH_HCYoutubeParser 2
+
 // Mantle
 #define COCOAPODS_POD_AVAILABLE_Mantle
 #define COCOAPODS_VERSION_MAJOR_Mantle 1

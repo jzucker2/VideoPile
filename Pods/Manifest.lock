@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - HCYoutubeParser (0.0.2)
   - Mantle (1.5.1):
     - Mantle/extobjc
   - Mantle/extobjc (1.5.1)
@@ -29,10 +30,12 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - HCYoutubeParser (~> 0.0.2)
   - RedditKit (~> 1.3)
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  HCYoutubeParser: d82d0b0e181c090a94f8f119fb2141303bc96ecf
   Mantle: d7c5ac734579ec751c58fecbf56189853056c58c
   RedditKit: 2f315962111262298195fa1b72a3a5ef1480887a
 
