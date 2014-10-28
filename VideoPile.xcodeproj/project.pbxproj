@@ -15,7 +15,6 @@
 		9727D29719FB03F10062909B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9727D29619FB03F10062909B /* Images.xcassets */; };
 		9727D29A19FB03F10062909B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9727D29819FB03F10062909B /* LaunchScreen.xib */; };
 		9727D2A619FB03F10062909B /* VideoPileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2A519FB03F10062909B /* VideoPileTests.m */; };
-		9727D2B719FB0E930062909B /* VideoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2B619FB0E930062909B /* VideoImageView.m */; };
 		9727D2BE19FF19100062909B /* 2000px-Orange_logo.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9727D2BD19FF19100062909B /* 2000px-Orange_logo.svg.png */; };
 		9727D2C119FF1AAD0062909B /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2C019FF1AAD0062909B /* VideoPlayerView.m */; };
 /* End PBXBuildFile section */
@@ -46,8 +45,6 @@
 		9727D29F19FB03F10062909B /* VideoPileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoPileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9727D2A419FB03F10062909B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9727D2A519FB03F10062909B /* VideoPileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoPileTests.m; sourceTree = "<group>"; };
-		9727D2B519FB0E930062909B /* VideoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoImageView.h; sourceTree = "<group>"; };
-		9727D2B619FB0E930062909B /* VideoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoImageView.m; sourceTree = "<group>"; };
 		9727D2BD19FF19100062909B /* 2000px-Orange_logo.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2000px-Orange_logo.svg.png"; sourceTree = "<group>"; };
 		9727D2BF19FF1AAD0062909B /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
 		9727D2C019FF1AAD0062909B /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
@@ -118,8 +115,6 @@
 				9727D29019FB03F10062909B /* ViewController.h */,
 				9727D29119FB03F10062909B /* ViewController.m */,
 				9727D29319FB03F10062909B /* Main.storyboard */,
-				9727D2B519FB0E930062909B /* VideoImageView.h */,
-				9727D2B619FB0E930062909B /* VideoImageView.m */,
 				9727D2BF19FF1AAD0062909B /* VideoPlayerView.h */,
 				9727D2C019FF1AAD0062909B /* VideoPlayerView.m */,
 				9727D2BD19FF19100062909B /* 2000px-Orange_logo.svg.png */,
@@ -292,7 +287,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9727D2B719FB0E930062909B /* VideoImageView.m in Sources */,
 				9727D29219FB03F10062909B /* ViewController.m in Sources */,
 				9727D28F19FB03F10062909B /* AppDelegate.m in Sources */,
 				9727D28C19FB03F10062909B /* main.m in Sources */,

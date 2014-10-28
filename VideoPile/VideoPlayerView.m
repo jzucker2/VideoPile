@@ -16,6 +16,9 @@
 
 @end
 
+static NSString* const VideoPlayerViewPassedUpvoteThreshold = @"VideoPlayerViewPassedUpvoteThreshold";
+static NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerViewPassedDownvoteThreshold";
+
 @implementation VideoPlayerView
 
 /*
@@ -38,6 +41,7 @@
         //[_moviePlayer.view setTintColor:[UIColor orangeColor]];
         _moviePlayer.scalingMode = MPMovieScalingModeNone;
         _moviePlayer.controlStyle = MPMovieControlStyleNone;
+        _moviePlayer.repeatMode = MPMovieRepeatModeOne;
         //MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]]];
         //[self presentMoviePlayerViewControllerAnimated:mp];
         [self addSubview:_moviePlayer.view];
@@ -47,7 +51,7 @@
     
     //_moviePlayer.view.tintColor = [UIColor redColor];
     
-    [self bringSubviewToFront:_playPauseButton];
+    //[self bringSubviewToFront:_playPauseButton];
         
     //    CALayer *maskLayer = [CALayer layer];
     //    maskLayer.contents = (id)[UIImage imageNamed:@"2000px-Orange_logo.svg.png"].CGImage;
@@ -71,7 +75,7 @@
     __block CGPoint location = [touch locationInView:self];
     __block CGPoint previous = [touch previousLocationInView:self];
     
-    NSLog(@"_originalFrame is %@", NSStringFromCGRect(_originalFrame));
+    //NSLog(@"_originalFrame is %@", NSStringFromCGRect(_originalFrame));
     
     if (CGRectIsEmpty(_originalFrame)) {
         _originalFrame = self.frame;
@@ -89,13 +93,13 @@
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.transform = CGAffineTransformMakeScale(0.6, 0.6);
     } completion:^(BOOL finished) {
-        NSLog(@"finished!");
+        //NSLog(@"finished!");
         [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.frame = CGRectOffset(self.frame,
                                       (location.x - previous.x),
                                       (location.y - previous.y));
         } completion:^(BOOL finished) {
-            NSLog(@"finished!");
+            //NSLog(@"finished!");
         }];
     }];
 }
@@ -120,7 +124,7 @@
                                   (location.x - previous.x),
                                   (location.y - previous.y));
     } completion:^(BOOL finished) {
-        NSLog(@"finished!");
+        //NSLog(@"finished!");
     }];
 }
 
@@ -139,7 +143,7 @@
         self.transform = CGAffineTransformIdentity;
         self.frame = _originalFrame;
     } completion:^(BOOL finished) {
-        NSLog(@"finished!");
+        //NSLog(@"finished!");
     }];
 }
 
@@ -158,7 +162,7 @@
         self.transform = CGAffineTransformIdentity;
         self.frame = _originalFrame;
     } completion:^(BOOL finished) {
-        NSLog(@"finished!");
+        //NSLog(@"finished!");
     }];
 }
 

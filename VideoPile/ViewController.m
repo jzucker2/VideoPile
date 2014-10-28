@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "VideoImageView.h"
 #import <RedditKit/RedditKit.h>
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
@@ -18,7 +17,6 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) NSMutableArray *topLinks;
-@property (nonatomic, strong) IBOutlet VideoImageView *imageView;
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 //@property (nonatomic, weak) IBOutlet UIView *playerView;
 //@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
@@ -308,37 +306,37 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //UITouch *touch = [touches anyObject];
-    NSLog(@"touchesEnded");
-    [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        if (!_didVote) {
-            NSLog(@"did not vote in touchesEnded");
-            _playerView.transform = CGAffineTransformIdentity;
-            _playerView.center = _originalCenter;
-        } else {
-            NSLog(@"didVote touchesEnded");
-            [_playerView.moviePlayer stop];
-            [UIView animateWithDuration:0.2 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                if (_didUpvote) {
-                    _playerView.center = CGPointMake(_playerView.center.x, -600);
-                    [self upvote];
-                } else if (_didDownvote) {
-                    _playerView.center = CGPointMake(_playerView.center.x, 900);
-                    [self downvote];
-                } else {
-                    NSLog(@"else");
-                }
-            } completion:^(BOOL finished) {
-                NSLog(@"finished!");
-                _didVote = NO;
-                _didUpvote = NO;
-                _didDownvote = NO;
-                [self updateTopLinks];
-                [self setVideo];
-            }];
-        }
-    } completion:^(BOOL finished) {
-        NSLog(@"finished!");
-    }];
+//    NSLog(@"touchesEnded");
+//    [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        if (!_didVote) {
+//            NSLog(@"did not vote in touchesEnded");
+//            _playerView.transform = CGAffineTransformIdentity;
+//            _playerView.center = _originalCenter;
+//        } else {
+//            NSLog(@"didVote touchesEnded");
+//            [_playerView.moviePlayer stop];
+//            [UIView animateWithDuration:0.2 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//                if (_didUpvote) {
+//                    _playerView.center = CGPointMake(_playerView.center.x, -600);
+//                    [self upvote];
+//                } else if (_didDownvote) {
+//                    _playerView.center = CGPointMake(_playerView.center.x, 900);
+//                    [self downvote];
+//                } else {
+//                    NSLog(@"else");
+//                }
+//            } completion:^(BOOL finished) {
+//                NSLog(@"finished!");
+//                _didVote = NO;
+//                _didUpvote = NO;
+//                _didDownvote = NO;
+//                [self updateTopLinks];
+//                [self setVideo];
+//            }];
+//        }
+//    } completion:^(BOOL finished) {
+//        NSLog(@"finished!");
+//    }];
     
 }
 
