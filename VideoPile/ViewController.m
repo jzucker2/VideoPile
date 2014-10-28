@@ -241,6 +241,8 @@
 {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:self.view];
+    CGPoint lastLocation = [touch previousLocationInView:self.view];
+    NSLog(@"touches is %@", touches);
     
     _didVote = NO;
     _didDownvote = NO;
@@ -256,6 +258,7 @@
             _didUpvote = YES;
         } else {
             _playerView.center = location;
+            _playerView.transform = CGAffineTransformMakeTranslation(location.x-lastLocation.x, location.y-lastLocation.y);
         }
     } completion:^(BOOL finished) {
 //        if (_didVote) {
@@ -290,7 +293,7 @@
         } else {
             NSLog(@"didVote touchesEnded");
             [_playerView.moviePlayer stop];
-            [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            [UIView animateWithDuration:0.2 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 if (_didUpvote) {
                     _playerView.center = CGPointMake(_playerView.center.x, -600);
                     [self upvote];
