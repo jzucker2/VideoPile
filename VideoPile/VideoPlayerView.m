@@ -10,6 +10,11 @@
 #import <HCYoutubeParser/HCYoutubeParser.h>
 @import MediaPlayer;
 
+// The lower the upper vote ratio, the lower on the screen it takes for an upvote
+#define UPPER_VOTE_THRESHOLD_FACTOR     0.10
+// The higher the lower vote ratio, the higher on the screen it takes for a vote to register
+#define LOWER_VOTE_THRESHOLD_FACTOR     0.55
+
 @interface VideoPlayerView ()
 
 @property (nonatomic) CGRect originalFrame;
@@ -164,11 +169,11 @@ NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerViewPassed
     __block BOOL didUpvote = NO;
     __block BOOL didDownvote = NO;
     __block CGRect finalFrame;
-    if (self.frame.origin.y < (-self.superview.frame.size.height * .25)) {
+    if (self.frame.origin.y < (-self.superview.frame.size.height * UPPER_VOTE_THRESHOLD_FACTOR)) {
         NSLog(@"up");
         finalFrame = CGRectOffset(self.frame, 0, -400);
         didUpvote = YES;
-    } else if (self.frame.origin.y > (self.superview.frame.size.height * .75)) {
+    } else if (self.frame.origin.y > (self.superview.frame.size.height * LOWER_VOTE_THRESHOLD_FACTOR)) {
         NSLog(@"down");
         didDownvote = YES;
         finalFrame = CGRectOffset(self.frame, 0, 400);

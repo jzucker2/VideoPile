@@ -417,7 +417,7 @@
 				INFOPLIST_FILE = VideoPile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c83804d2-a140-440b-abe4-a257f3a1b39e";
+				PROVISIONING_PROFILE = "e4d3bc2e-3b5a-47c2-b6c3-fe646d50fa4a";
 			};
 			name = Debug;
 		};
