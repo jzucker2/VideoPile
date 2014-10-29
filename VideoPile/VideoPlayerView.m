@@ -80,6 +80,10 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
     _redditLink = link;
     _redditURL = link.URL;
     
+    
+    if (!CGRectIsEmpty(_originalFrame)) {
+        self.frame = _originalFrame;
+    }
     // Gets an dictionary with each available youtube url
     NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:_redditURL];
     
