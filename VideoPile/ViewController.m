@@ -173,7 +173,7 @@
     
     [_backgroundView setImageWithURL:url placeholderImage:nil];
     
-    _scoreLabel.text = [NSString stringWithFormat:@"%ld", link.score];
+    _scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)link.score];
     _titleLabel.text = link.title;
     
     

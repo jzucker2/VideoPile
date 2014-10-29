@@ -212,15 +212,6 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
     }
 }
 
-- (IBAction)playPauseAction:(id)sender
-{
-    if ((_moviePlayer.playbackState == MPMoviePlaybackStatePaused) || (_moviePlayer.playbackState == MPMoviePlaybackStateStopped)) {
-        [self playVideo];
-    } else if (_moviePlayer.playbackState == MPMoviePlaybackStatePlaying) {
-        [self pauseVideo];
-    }
-}
-
 - (void)setState:(BOOL)shouldPause
 {
     _isPausedState = shouldPause;
@@ -290,10 +281,10 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
 {
     if (!_startedMoving) {
         NSLog(@"PLAY PAUSE!");
-        if ((_moviePlayer.playbackState == MPMoviePlaybackStatePaused) || (_moviePlayer.playbackState == MPMoviePlaybackStateStopped)) {
-            [self playVideo];
-        } else if (_moviePlayer.playbackState == MPMoviePlaybackStatePlaying) {
+        if (self.player.rate != 0.0) {
             [self pauseVideo];
+        } else {
+            [self playVideo];
         }
     }
 }

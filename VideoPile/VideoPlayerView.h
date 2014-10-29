@@ -20,8 +20,6 @@ extern NSString* const VideoPlayerViewPassedDownvoteThreshold;
 @property (nonatomic, weak) IBOutlet UIButton *playPauseButton;
 @property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
 
-- (IBAction)playPauseAction:(id)sender;
-
 - (void)setVideo:(RKLink *)link;
 
 - (void)pauseVideo;
