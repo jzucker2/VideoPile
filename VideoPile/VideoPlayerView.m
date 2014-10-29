@@ -9,6 +9,7 @@
 #import "VideoPlayerView.h"
 #import <HCYoutubeParser/HCYoutubeParser.h>
 #import <RedditKit/RedditKit.h>
+#import "AVPlayerView.h"
 @import MediaPlayer;
 
 // The lower the upper vote ratio, the lower on the screen it takes for an upvote (default 0.10)
@@ -28,8 +29,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property (nonatomic, weak) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, weak) IBOutlet UILabel *scoreTitleLabel;
+@property (nonatomic, strong) AVPlayerView *player;
 
 @end
 

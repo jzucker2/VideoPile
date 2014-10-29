@@ -19,6 +19,7 @@
 		9727D2C119FF1AAD0062909B /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2C019FF1AAD0062909B /* VideoPlayerView.m */; };
 		97CBF1C71A0191F800CB5488 /* upvote.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1C61A0191F800CB5488 /* upvote.png */; };
 		97CBF1C91A01928200CB5488 /* downvote.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1C81A01928200CB5488 /* downvote.png */; };
+		97CBF1CC1A019F1000CB5488 /* AVPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CBF1CB1A019F1000CB5488 /* AVPlayerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		9727D2C019FF1AAD0062909B /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
 		97CBF1C61A0191F800CB5488 /* upvote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upvote.png; sourceTree = "<group>"; };
 		97CBF1C81A01928200CB5488 /* downvote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downvote.png; sourceTree = "<group>"; };
+		97CBF1CA1A019F1000CB5488 /* AVPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVPlayerView.h; sourceTree = "<group>"; };
+		97CBF1CB1A019F1000CB5488 /* AVPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayerView.m; sourceTree = "<group>"; };
 		C0D80F857FDA98E6A2188593 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +121,8 @@
 				9727D28E19FB03F10062909B /* AppDelegate.m */,
 				9727D29019FB03F10062909B /* ViewController.h */,
 				9727D29119FB03F10062909B /* ViewController.m */,
+				97CBF1CA1A019F1000CB5488 /* AVPlayerView.h */,
+				97CBF1CB1A019F1000CB5488 /* AVPlayerView.m */,
 				9727D29319FB03F10062909B /* Main.storyboard */,
 				9727D2BF19FF1AAD0062909B /* VideoPlayerView.h */,
 				9727D2C019FF1AAD0062909B /* VideoPlayerView.m */,
@@ -299,6 +304,7 @@
 				9727D28F19FB03F10062909B /* AppDelegate.m in Sources */,
 				9727D28C19FB03F10062909B /* main.m in Sources */,
 				9727D2C119FF1AAD0062909B /* VideoPlayerView.m in Sources */,
+				97CBF1CC1A019F1000CB5488 /* AVPlayerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
