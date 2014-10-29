@@ -9,8 +9,17 @@
 #import "VideoPlayerView.h"
 #import <HCYoutubeParser/HCYoutubeParser.h>
 #import <RedditKit/RedditKit.h>
-#import "AVPlayerView.h"
+//#import "AVPlayerView.h"
 @import MediaPlayer;
+@import AVFoundation;
+
+/* Asset keys */
+NSString * const kTracksKey = @"tracks";
+NSString * const kPlayableKey = @"playable";
+
+/* PlayerItem keys */
+NSString * const kStatusKey         = @"status";
+NSString * const kCurrentItemKey	= @"currentItem";
 
 // The lower the upper vote ratio, the lower on the screen it takes for an upvote (default 0.10)
 #define UPPER_VOTE_THRESHOLD_FACTOR     0.10
@@ -31,12 +40,15 @@
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, weak) IBOutlet UILabel *scoreTitleLabel;
-@property (nonatomic, strong) AVPlayerView *player;
+@property (nonatomic, strong) AVPlayerItem *playerItem;
 
 @end
 
 NSString* const VideoPlayerViewPassedUpvoteThreshold = @"VideoPlayerViewPassedUpvoteThreshold";
 NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerViewPassedDownvoteThreshold";
+
+static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext;
+static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPlayerDemoPlaybackViewControllerStatusObservationContext;
 
 @implementation VideoPlayerView
 
@@ -51,13 +63,13 @@ NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerViewPassed
 - (void)playVideo
 {
     [self setState:NO];
-    [_moviePlayer play];
+    [self.player play];
 }
 
 - (void)pauseVideo
 {
     [self setState:YES];
-    [_moviePlayer pause];
+    [self.player pause];
 }
 
 - (void)setVideo:(RKLink *)link
@@ -67,24 +79,42 @@ NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerViewPassed
     }
     _redditLink = link;
     _redditURL = link.URL;
+    
     // Gets an dictionary with each available youtube url
     NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:_redditURL];
     
-    if (!_moviePlayer) {
-        // Presents a MoviePlayerController with the youtube quality medium
-        _moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]]];
-        _moviePlayer.view.frame = self.frame;
-        //[_moviePlayer.view setTintColor:[UIColor orangeColor]];
-        _moviePlayer.scalingMode = MPMovieScalingModeNone;
-        _moviePlayer.controlStyle = MPMovieControlStyleNone;
-        _moviePlayer.repeatMode = MPMovieRepeatModeOne;
-        //MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]]];
-        //[self presentMoviePlayerViewControllerAnimated:mp];
-        [self addSubview:_moviePlayer.view];
-    } else {
-        _moviePlayer.contentURL = [NSURL URLWithString:[videos objectForKey:@"medium"]];
-        self.frame = _originalFrame;
-    }
+    NSURL *youtubeURL = [NSURL URLWithString:[videos objectForKey:@"medium"]];
+    
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:youtubeURL options:nil];
+    
+    NSArray *requestedKeys = [NSArray arrayWithObjects:kTracksKey, kPlayableKey, nil];
+    
+    [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
+     ^{
+         dispatch_async( dispatch_get_main_queue(),
+                        ^{
+                            [self prepareToPlayAsset:asset withKeys:requestedKeys];
+                        });
+     }];
+//    // Gets an dictionary with each available youtube url
+//    NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:_redditURL];
+//    
+//    if (!self.player) {
+//        // Presents a MoviePlayerController with the youtube quality medium
+//        NSURL *youtubeURL = [NSURL URLWithString:[videos objectForKey:@"medium"]];
+//        self.player = ;
+//        _moviePlayer.view.frame = self.frame;
+//        //[_moviePlayer.view setTintColor:[UIColor orangeColor]];
+//        _moviePlayer.scalingMode = MPMovieScalingModeNone;
+//        _moviePlayer.controlStyle = MPMovieControlStyleNone;
+//        _moviePlayer.repeatMode = MPMovieRepeatModeOne;
+//        //MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]]];
+//        //[self presentMoviePlayerViewControllerAnimated:mp];
+//        [self addSubview:_moviePlayer.view];
+//    } else {
+//        _moviePlayer.contentURL = [NSURL URLWithString:[videos objectForKey:@"medium"]];
+//        self.frame = _originalFrame;
+//    }
     
     if (!_blurEffectView) {
         UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
@@ -117,6 +147,69 @@ NSString* const VideoPlayerViewPassedDownvoteThreshold = @"VideoPlayerViewPassed
     //_playerView.layer.mask = maskLayer;
     
     //[_moviePlayer performSelector:@selector(play) withObject:nil afterDelay:2];
+}
+
+- (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
+    for (NSString *thisKey in requestedKeys) {
+        NSError *error = nil;
+        AVKeyValueStatus keyStatus = [asset statusOfValueForKey:thisKey error:&error];
+        if (keyStatus == AVKeyValueStatusFailed) {
+            return;
+        }
+    }
+    
+    if (!asset.playable) {
+        return;
+    }
+    
+    if (_playerItem) {
+        [_playerItem removeObserver:self forKeyPath:kStatusKey];
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:AVPlayerItemDidPlayToEndTimeNotification
+                                                      object:_playerItem];
+    }
+    
+    _playerItem = [AVPlayerItem playerItemWithAsset:asset];
+    [_playerItem addObserver:self
+                      forKeyPath:kStatusKey
+                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                         context:AVPlayerDemoPlaybackViewControllerStatusObservationContext];
+    
+    if (!self.player) {
+        [self setPlayer:[AVPlayer playerWithPlayerItem:_playerItem]];
+        [self.player addObserver:self
+                      forKeyPath:kCurrentItemKey
+                         options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                         context:AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext];
+    }
+    
+    if (self.player.currentItem != _playerItem) {
+        [self.player replaceCurrentItemWithPlayerItem:_playerItem];
+    }
+}
+
+#pragma mark - Key Value Observing
+
+- (void)observeValueForKeyPath:(NSString*) path
+                      ofObject:(id)object
+                        change:(NSDictionary*)change
+                       context:(void*)context {
+    if (context == AVPlayerDemoPlaybackViewControllerStatusObservationContext) {
+        AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+        if (status == AVPlayerStatusReadyToPlay) {
+            //[self.player play];
+        }
+    } else if (context == AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext) {
+        AVPlayerItem *newPlayerItem = [change objectForKey:NSKeyValueChangeNewKey];
+        
+        if (newPlayerItem) {
+            [self setPlayer:self.player];
+            [self setVideoFillMode:AVLayerVideoGravityResizeAspect];
+        }
+    } else {
+        [super observeValueForKeyPath:path ofObject:object change:change context:context];
+    }
 }
 
 - (IBAction)playPauseAction:(id)sender

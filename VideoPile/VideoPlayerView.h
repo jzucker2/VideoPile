@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AVPlayerView.h"
+
 
 @class MPMoviePlayerController, RKLink;
 
 extern NSString* const VideoPlayerViewPassedUpvoteThreshold;
 extern NSString* const VideoPlayerViewPassedDownvoteThreshold;
 
-@interface VideoPlayerView : UIView
+@interface VideoPlayerView : AVPlayerView
 
 @property (nonatomic, weak) IBOutlet UIButton *playPauseButton;
 @property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
