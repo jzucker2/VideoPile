@@ -28,6 +28,9 @@
 @property (nonatomic, assign) BOOL didVote;
 @property (nonatomic, assign) BOOL didUpvote;
 @property (nonatomic, assign) BOOL didDownvote;
+@property (nonatomic, weak) IBOutlet UILabel *scoreTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 @end
 
@@ -146,7 +149,7 @@
     
     [_playerView pauseVideo];
     
-    [_playerView setVideo:link.URL];
+    [_playerView setVideo:link];
     
     [self setVideoThumbnailForBackgroundView:[_topLinks objectAtIndex:1]];
     
@@ -170,15 +173,22 @@
     
     [_backgroundView setImageWithURL:url placeholderImage:nil];
     
-    //
-    //    UIVisualEffect *blurEffect;
-    //    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    //
-    //    UIVisualEffectView *visualEffectView;
-    //    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    //
-    //    visualEffectView.frame = _imageView.bounds;
-    //    [_imageView addSubview:visualEffectView];
+    _scoreLabel.text = [NSString stringWithFormat:@"%ld", link.score];
+    _titleLabel.text = link.title;
+    
+    
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    
+    UIVisualEffectView *visualEffectView;
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
+    visualEffectView.frame = _backgroundView.bounds;
+    [_backgroundView addSubview:visualEffectView];
+    
+    [_backgroundView bringSubviewToFront:_scoreTitleLabel];
+    [_backgroundView bringSubviewToFront:_titleLabel];
+    [_backgroundView bringSubviewToFront:_scoreLabel];
 }
 
 - (void)didReceiveMemoryWarning {

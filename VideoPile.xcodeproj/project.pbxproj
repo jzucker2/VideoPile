@@ -17,6 +17,8 @@
 		9727D2A619FB03F10062909B /* VideoPileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2A519FB03F10062909B /* VideoPileTests.m */; };
 		9727D2BE19FF19100062909B /* 2000px-Orange_logo.svg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9727D2BD19FF19100062909B /* 2000px-Orange_logo.svg.png */; };
 		9727D2C119FF1AAD0062909B /* VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9727D2C019FF1AAD0062909B /* VideoPlayerView.m */; };
+		97CBF1C71A0191F800CB5488 /* upvote.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1C61A0191F800CB5488 /* upvote.png */; };
+		97CBF1C91A01928200CB5488 /* downvote.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CBF1C81A01928200CB5488 /* downvote.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		9727D2BD19FF19100062909B /* 2000px-Orange_logo.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2000px-Orange_logo.svg.png"; sourceTree = "<group>"; };
 		9727D2BF19FF1AAD0062909B /* VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerView.h; sourceTree = "<group>"; };
 		9727D2C019FF1AAD0062909B /* VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerView.m; sourceTree = "<group>"; };
+		97CBF1C61A0191F800CB5488 /* upvote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upvote.png; sourceTree = "<group>"; };
+		97CBF1C81A01928200CB5488 /* downvote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downvote.png; sourceTree = "<group>"; };
 		C0D80F857FDA98E6A2188593 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +122,8 @@
 				9727D2BF19FF1AAD0062909B /* VideoPlayerView.h */,
 				9727D2C019FF1AAD0062909B /* VideoPlayerView.m */,
 				9727D2BD19FF19100062909B /* 2000px-Orange_logo.svg.png */,
+				97CBF1C61A0191F800CB5488 /* upvote.png */,
+				97CBF1C81A01928200CB5488 /* downvote.png */,
 				9727D29619FB03F10062909B /* Images.xcassets */,
 				9727D29819FB03F10062909B /* LaunchScreen.xib */,
 				9727D28919FB03F10062909B /* Supporting Files */,
@@ -236,7 +242,9 @@
 				9727D29519FB03F10062909B /* Main.storyboard in Resources */,
 				9727D29A19FB03F10062909B /* LaunchScreen.xib in Resources */,
 				9727D2BE19FF19100062909B /* 2000px-Orange_logo.svg.png in Resources */,
+				97CBF1C71A0191F800CB5488 /* upvote.png in Resources */,
 				9727D29719FB03F10062909B /* Images.xcassets in Resources */,
+				97CBF1C91A01928200CB5488 /* downvote.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

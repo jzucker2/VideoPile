@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class MPMoviePlayerController;
+@class MPMoviePlayerController, RKLink;
 
 extern NSString* const VideoPlayerViewPassedUpvoteThreshold;
 extern NSString* const VideoPlayerViewPassedDownvoteThreshold;
@@ -20,7 +20,7 @@ extern NSString* const VideoPlayerViewPassedDownvoteThreshold;
 
 - (IBAction)playPauseAction:(id)sender;
 
-- (void)setVideo:(NSURL *)url;
+- (void)setVideo:(RKLink *)link;
 
 - (void)pauseVideo;
 - (void)playVideo;
