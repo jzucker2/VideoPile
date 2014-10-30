@@ -72,6 +72,13 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
     [self.player pause];
 }
 
+- (void)dealloc
+{
+    [self.player removeObserver:self forKeyPath:kCurrentItemKey];
+    [self.player.currentItem removeObserver:self forKeyPath:kStatusKey];
+    [self.player pause];
+}
+
 - (void)setVideo:(RKLink *)link
 {
     if (_dateFormatter) {
@@ -100,25 +107,6 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
                             [self prepareToPlayAsset:asset withKeys:requestedKeys];
                         });
      }];
-//    // Gets an dictionary with each available youtube url
-//    NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:_redditURL];
-//    
-//    if (!self.player) {
-//        // Presents a MoviePlayerController with the youtube quality medium
-//        NSURL *youtubeURL = [NSURL URLWithString:[videos objectForKey:@"medium"]];
-//        self.player = ;
-//        _moviePlayer.view.frame = self.frame;
-//        //[_moviePlayer.view setTintColor:[UIColor orangeColor]];
-//        _moviePlayer.scalingMode = MPMovieScalingModeNone;
-//        _moviePlayer.controlStyle = MPMovieControlStyleNone;
-//        _moviePlayer.repeatMode = MPMovieRepeatModeOne;
-//        //MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]]];
-//        //[self presentMoviePlayerViewControllerAnimated:mp];
-//        [self addSubview:_moviePlayer.view];
-//    } else {
-//        _moviePlayer.contentURL = [NSURL URLWithString:[videos objectForKey:@"medium"]];
-//        self.frame = _originalFrame;
-//    }
     
     if (!_blurEffectView) {
         UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
@@ -137,20 +125,6 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
     [self.superview bringSubviewToFront:self];
     [self bringSubviewToFront:_moviePlayer.view];
     [self setState:YES];
-    
-    //_moviePlayer.view.tintColor = [UIColor redColor];
-    
-    //[self bringSubviewToFront:_playPauseButton];
-        
-    //    CALayer *maskLayer = [CALayer layer];
-    //    maskLayer.contents = (id)[UIImage imageNamed:@"2000px-Orange_logo.svg.png"].CGImage;
-    //
-    //    maskLayer.opacity = 0.5;
-    //
-    //    [_playerView.layer insertSublayer:maskLayer atIndex:0];
-    //_playerView.layer.mask = maskLayer;
-    
-    //[_moviePlayer performSelector:@selector(play) withObject:nil afterDelay:2];
 }
 
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
@@ -247,7 +221,6 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
     __block CGPoint location = [touch locationInView:self];
     __block CGPoint previous = [touch previousLocationInView:self];
     
-    //NSLog(@"_originalFrame is %@", NSStringFromCGRect(_originalFrame));
     
     if (CGRectIsEmpty(_originalFrame)) {
         _originalFrame = self.frame;
@@ -258,22 +231,6 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
         previous = CGPointApplyAffineTransform(previous, self.transform);
     }
     
-    //    self.frame = CGRectOffset(self.frame,
-    //                              (location.x - previous.x),
-    //                              (location.y - previous.y));
-    
-//    [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//        self.transform = CGAffineTransformMakeScale(0.6, 0.6);
-//    } completion:^(BOOL finished) {
-//        //NSLog(@"finished!");
-//        [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-////            self.frame = CGRectOffset(self.frame,
-////                                      (location.x - previous.x),
-////                                      (location.y - previous.y));
-//        } completion:^(BOOL finished) {
-//            //NSLog(@"finished!");
-//        }];
-//    }];
     if (touch.tapCount == 1) {
         NSLog(@"play pause!");
         [self performSelector:@selector(togglePlayPause) withObject:nil afterDelay:0.2];
@@ -301,32 +258,12 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
     
     CGAffineTransform translateTransformTest = CGAffineTransformMakeTranslation(location.x-previous.x, location.y-previous.y);
     
-    //CGAffineTransform translateTransform = CGAffineTransformTranslate(self.transform, location.x-previous.x, location.y-previous.y);
-    
-//    if (!CGAffineTransformIsIdentity(self.transform)) {
-//        location = CGPointApplyAffineTransform(location, self.transform);
-//        previous = CGPointApplyAffineTransform(previous, self.transform);
-//    }
-    
-//    self.frame = CGRectOffset(self.frame,
-//                              (location.x - previous.x),
-//                              (location.y - previous.y));
-    
-    NSLog(@"----------------");
-    NSLog(@"_lastTouchesBeganTimestamp %f", _lastTouchesBeganTimestamp);
-    NSLog(@"touch.timestamp %f", touch.timestamp);
-    NSLog(@"----------------");
-    
-    
     if (!_startedMoving) {
         [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.transform = CGAffineTransformMakeScale(0.6, 0.6);
         } completion:^(BOOL finished) {
             _startedMoving = YES;
             [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//                self.frame = CGRectOffset(self.frame,
-//                                          (location.x - previous.x),
-//                                          (location.y - previous.y));
                 self.center = CGPointApplyAffineTransform(self.center, translateTransformTest);
             } completion:^(BOOL finished) {
                 //NSLog(@"finished!");
@@ -334,41 +271,15 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
         }];
     } else {
         [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//            self.frame = CGRectOffset(self.frame,
-//                                      (location.x - previous.x),
-//                                      (location.y - previous.y));
             self.center = CGPointApplyAffineTransform(self.center, translateTransformTest);
         } completion:^(BOOL finished) {
             //NSLog(@"finished!");
         }];
     }
-    
-//    [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-////        self.frame = CGRectOffset(self.frame,
-////                                  (location.x - previous.x),
-////                                  (location.y - previous.y));
-//        self.center = CGPointApplyAffineTransform(self.center, translateTransformTest);
-//    } completion:^(BOOL finished) {
-//        //NSLog(@"finished!");
-//    }];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    UITouch *touch = [touches anyObject];
-//    __block CGPoint location = [touch locationInView:self];
-//    __block CGPoint previous = [touch previousLocationInView:self];
-    
-//    if (!CGAffineTransformIsIdentity(self.transform)) {
-//        location = CGPointApplyAffineTransform(location, self.transform);
-//        previous = CGPointApplyAffineTransform(previous, self.transform);
-//    }
-    
-//    if (self.frame.origin.y > (self.superview.frame.size.height * .25)) {
-//        NSLog(@"one way");
-//    } else if (self.frame.origin.y < (self.superview.frame.size.height * .75)) {
-//        NSLog(@"other way");
-//    }
     _startedMoving = NO;
     _lastTouchesBeganTimestamp = 0;
     
@@ -401,13 +312,6 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
         }
         didDownvote = NO;
         didUpvote = NO;
-        //NSLog(@"finished!");
-        // would be cool if it resized after moving as opposed to while moving
-//        [UIView animateWithDuration:0.2 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//            self.transform = CGAffineTransformIdentity;
-//        } completion:^(BOOL finished) {
-//            //NSLog(@"finished");
-//        }];
     }];
 }
 

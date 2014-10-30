@@ -18,12 +18,8 @@
 
 @property (nonatomic, strong) NSMutableArray *topLinks;
 @property (nonatomic, strong) UIDynamicAnimator *animator;
-//@property (nonatomic, weak) IBOutlet UIView *playerView;
-//@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
 @property (nonatomic, weak) IBOutlet VideoPlayerView *playerView;
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundView;
-@property (nonatomic) CGPoint originalCenter;
-@property (nonatomic, strong) UIView *tintView;
 @property (nonatomic, strong) UIImageView *maskImageView;
 @property (nonatomic, assign) BOOL didVote;
 @property (nonatomic, assign) BOOL didUpvote;
@@ -47,25 +43,10 @@
     
     _topLinks = [[NSMutableArray alloc] init];
     
-    _originalCenter = _playerView.center;
-    
-    _tintView = [[UIView alloc] initWithFrame:_playerView.frame];
-    
     _backgroundView.userInteractionEnabled = NO;
     
-//    CALayer *maskLayer = [CALayer layer];
-//    maskLayer.contents = (id)[UIImage imageNamed:@"2000px-Orange_logo.svg.png"].CGImage;
-
-    
-//    _tintView.opaque = NO;
-    
-    //_tintView.alpha = 0.5;
-    
-    [_tintView setTintColor:[UIColor orangeColor]];
     
     _maskImageView = [[UIImageView alloc] initWithFrame:_playerView.frame];
-    
-    //[_playerView setMaskView:_tintView];
     
     [[RKClient sharedClient] signInWithUsername:@"hacksesh" password:@"hacksesh" completion:^(NSError *error) {
         if (error) {
@@ -88,8 +69,6 @@
     [[RKClient sharedClient] linksInSubredditWithName:@"videos" pagination:nil completion:^(NSArray *collection, RKPagination *pagination, NSError *error) {
         NSLog(@"collection is %@", collection);
         _topLinks = [collection mutableCopy];
-        //RKLink *link = (RKLink *)[collection firstObject];
-        //[_playerView setVideo:link.URL];
         [self setVideo];
     }];
 }
@@ -144,7 +123,6 @@
 
 - (void)setVideo
 {
-    //[_topLinks removeObjectAtIndex:0];
     RKLink *link = [_topLinks firstObject];
     
     [_playerView pauseVideo];
@@ -152,8 +130,6 @@
     [_playerView setVideo:link];
     
     [self setVideoThumbnailForBackgroundView:[_topLinks objectAtIndex:1]];
-    
-    //_playerView.center = _originalCenter;
 }
 
 - (void)updateTopLinks
