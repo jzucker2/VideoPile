@@ -109,7 +109,7 @@ static void *AVPlayerDemoPlaybackViewControllerStatusObservationContext = &AVPla
      }];
     
     if (!_blurEffectView) {
-        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         _blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         
         _blurEffectView.frame = self.bounds;

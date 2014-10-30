@@ -154,7 +154,7 @@
     
     
     UIVisualEffect *blurEffect;
-    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     
     UIVisualEffectView *visualEffectView;
     visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
